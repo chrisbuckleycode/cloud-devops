@@ -2,11 +2,10 @@
 
 Various infrastructure and application related scripts/IaC including:
 
-- [Terraform](/terraform/) (multi-cloud)
-- [Bash](/shell/)
-- [Python](/python/)
-- [Ansible](/ansible/)
-- [Golang](/golang/)
+- [Terraform](/1.terraform/) (multi-cloud)
+- [Bash](/2.shell/)
+- [Python](/3.python/)
+- [Miscellaneous](/4.miscellaneous/)
 
 ## More
 
