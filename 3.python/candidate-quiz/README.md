@@ -31,3 +31,4 @@ $ python3 main.py
 
 - Name submission and write scores to database.
 - Prevent cheating.
+- Log to file.
