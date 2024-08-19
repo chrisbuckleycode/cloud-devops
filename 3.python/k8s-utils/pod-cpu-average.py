@@ -7,6 +7,7 @@
 ## USAGE: python3 pod-cpu-average.py <namespace>
 ##
 # TODO(chrisbuckleycode): Add color inverter for recently updated values
+# TODO(chrisbuckleycode): Add commenting
 
 import argparse
 import time
