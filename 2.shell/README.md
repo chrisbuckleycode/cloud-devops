@@ -18,6 +18,9 @@ Displays a node's pods, sorted by CPU usage. Similar to kubectl get nodes.
 ## outlier-find.sh
 Find outlier processes and display their statistics.
 
+## pod-cpu-average.sh
+Displays pod CPU statistics for a specified namespace: current CPU, running average CPU, CPU requests (if any).
+
 ## proc-loop-sample.sh
 Loops over "status" file in each process directory in /proc, returns table sorted by requested stat e.g., "VmPeak", "VmSize", "VmRSS", etc.
 
