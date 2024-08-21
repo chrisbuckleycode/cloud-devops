@@ -19,7 +19,7 @@ $ pip install -r requirements.txt
 
 # Usage
 
-## backup_github_repos.py
+## pod-cpu-average.py
 Displays pod CPU statistics for a specified namespace: current CPU, running average CPU, CPU requests (if any).
 ```bash
 $ python3 pod-cpu-average.py <namespace>
