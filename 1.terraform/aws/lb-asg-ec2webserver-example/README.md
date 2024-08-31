@@ -36,3 +36,4 @@ Look for output variable for load-balancer endpoint url to copy and paste into y
 ```
 alb_web_dns_name = "alb-web-2103847519.us-east-1.elb.amazonaws.com"
 ```
+Refresh to witness page serving from all instances.
