@@ -3,7 +3,9 @@
 Creates:
 - VPC
 - IGW
-- For each azone: a public subnet (with NAT gateway), a private subnet
+- For each AZ: a public subnet (with NAT gateway), a private subnet
+- routes
+- n.b. NO security groups
 
 Configure variable `subnet_depth` to specify desired number of public/private subnet pairs.
 
@@ -21,6 +23,6 @@ Run the usual Terraform commands.
 
 ```
 $ terraform init
-$ terraform plan out=planfile
+$ terraform plan -out=planfile
 $ terraform apply planfile
 ```
