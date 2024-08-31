@@ -12,8 +12,6 @@ Configure variable `subnet_depth` to specify desired number of public/private su
 
 Accessing the load-balancer endpoint on port 80 will display a page of instance metadata.
 
-Note: Health checks work on a long timeout period and need to be refined.
-
 ## Instructions
 
 Don't forget to authenticate to AWS e.g.
