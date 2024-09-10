@@ -1,0 +1,7 @@
+grafana:
+  additionalDataSources:
+   - name: Loki
+     access: proxy
+     type: loki
+     url: http://loki-gateway.monitoring.svc.cluster.local
+     version: 1
