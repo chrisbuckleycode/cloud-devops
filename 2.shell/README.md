@@ -9,6 +9,9 @@ Lists CRDs in a Kubernetes manifest.
 ## gke-cluster-create.sh
 In development...
 
+## k8s-observability-stack/
+Installs Prometheus, Grafana, Loki, Promtail to an existing Kubernetes cluster. Tested on a standard kind cluster.
+
 ## load-average.sh
 Monitors cpu and memory usage over a period, gets running averages without external monitoring.
 
