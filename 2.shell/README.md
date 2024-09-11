@@ -6,6 +6,9 @@ For an AWS account, returns EKS clusters, their instances, types and lifecycle.
 ## crds-list.sh
 Lists CRDs in a Kubernetes manifest.
 
+## extract-crds.sh
+Checks a Helm chart for crds to delete after de-installation
+
 ## gke-cluster-create.sh
 In development...
 
