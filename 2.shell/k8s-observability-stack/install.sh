@@ -16,8 +16,8 @@ helm repo add grafana https://grafana.github.io/helm-charts
 helm repo update
 
 kubectl create ns monitoring
-helm install loki grafana/loki --values values-loki.yaml --namespace monitoring
-helm install promtail grafana/promtail --values values-promtail.yaml --namespace monitoring
-helm install prometheus prometheus-community/kube-prometheus-stack --values values-grafana.yaml --namespace monitoring
+helm install loki grafana/loki --values val-loki.yaml --namespace monitoring
+helm install promtail grafana/promtail --values val-promtail.yaml --namespace monitoring
+helm install prometheus prometheus-community/kube-prometheus-stack --values val-grafana.yaml --namespace monitoring
 
 kubectl get po -n monitoring
