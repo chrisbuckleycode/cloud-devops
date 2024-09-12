@@ -1,5 +1,8 @@
 # Shell
 
+## aws-s3-buckets-delete.sh
+Retrieves bucket names and deletes each bucket one by one, all using AWS CLI.
+
 ## aws-eks-cluster-list.sh
 For an AWS account, returns EKS clusters, their instances, types and lifecycle.
 
@@ -38,6 +41,9 @@ Searches r/kubernetes on Reddit, from the command line.
 
 ## sum-kubectl-top-pod.sh
 Runs "kubectl top pod -A" and sums the CPU and Memory columns.
+
+## terraform-import-block-s3-buckets.sh
+Retrieves bucket names using AWS CLI, then generates Terraform files required for resource import.
 
 ## zabbix-agent-install.sh
 Installs Zabbix agent2 on Ubuntu 22.04.
