@@ -45,6 +45,9 @@ Runs "kubectl top pod -A" and sums the CPU and Memory columns.
 ## terraform-import-block-s3-buckets.sh
 Retrieves bucket names using AWS CLI, then generates Terraform files required for resource import.
 
+## ubuntu22-bootstrapper.sh
+One-by-one installer tool for new Ubuntu 22 server.
+
 ## zabbix-agent-install.sh
 Installs Zabbix agent2 on Ubuntu 22.04.
 
