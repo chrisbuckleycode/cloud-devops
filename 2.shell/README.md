@@ -15,6 +15,9 @@ Checks a Helm chart for crds to delete after de-installation
 ## gke-cluster-create.sh
 In development...
 
+## golden-signals.sh
+Multiple Linux metrics collection tests, nominally related to Google SRE Book's "4 Golden Signals" of monitoring.
+
 ## k8s-observability-stack/
 Installs Prometheus, Grafana, Loki, Promtail to an existing Kubernetes cluster. Tested on a standard kind cluster.
 
