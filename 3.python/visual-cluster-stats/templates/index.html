@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kubernetes Cluster Resource Usage</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .charts {
+            display: flex;
+            justify-content: space-around;
+        }
+        .chart-container {
+            width: 400px;
+            height: 300px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Kubernetes Cluster Resource Usage</h1>
+        <div id="usage"></div>
+        <div class="charts">
+            <div class="chart-container">
+                <canvas id="cpuChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <canvas id="memoryChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const cpuChart = new Chart(document.getElementById('cpuChart'), {
+            type: 'bar',
+            data: {
+                labels: ['CPU'],
+                datasets: [{
+                    label: 'CPU Usage',
+                    data: [0],
+                    backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        ticks: {
+                            callback: function(value) {
+                                return value + '%';
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'CPU Usage'
+                    }
+                }
+            }
+        });
+
+        const memoryChart = new Chart(document.getElementById('memoryChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Memory'],
+                datasets: [{
+                    label: 'Memory Usage',
+                    data: [0],
+                    backgroundColor: 'rgba(255, 99, 132, 0.6)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        ticks: {
+                            callback: function(value) {
+                                return value + '%';
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Memory Usage'
+                    }
+                }
+            }
+        });
+
+        let lastCpu = 0;
+        let lastMemory = 0;
+
+        function updateUsage() {
+            fetch('/get_usage')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.cpu !== lastCpu || data.memory !== lastMemory) {
+                        document.getElementById('usage').innerHTML = `CPU: ${data.cpu}%, Memory: ${data.memory}%`;
+                        
+                        cpuChart.data.datasets[0].data = [data.cpu];
+                        cpuChart.update();
+
+                        memoryChart.data.datasets[0].data = [data.memory];
+                        memoryChart.update();
+
+                        lastCpu = data.cpu;
+                        lastMemory = data.memory;
+                    }
+                })
+                .catch(error => console.error('Error:', error))
+                .finally(() => {
+                    setTimeout(updateUsage, 1000);
+                });
+        }
+
+        updateUsage();
+    </script>
+</body>
+</html>
