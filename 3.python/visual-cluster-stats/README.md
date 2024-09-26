@@ -19,10 +19,12 @@ $ pip install -r requirements.txt
 
 # Usage
 
+This must be run directly on the node. Obviously, this is for demo/development purposes only and not production use.
 ```bash
 $ python3 app.py
 ```
 
 # To-Do
 
-- Use python kubernetes client instead of subprocess. Will require a service & other resources.
+- Use Python Kubernetes client instead of subprocess. This requires a service & other resources.
+- Ship as a full app i.e. with a Dockerfile and required Kubernetes resources.

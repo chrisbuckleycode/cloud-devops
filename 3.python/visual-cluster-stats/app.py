@@ -4,7 +4,9 @@
 ##
 ## AUTHOR: Chris Buckley (github.com/chrisbuckleycode)
 ## 
-# TODO(chrisbuckleycode): Use python kubernetes client instead of subprocess. Will require a service & other resources.
+# TODO(chrisbuckleycode): Use Python Kubernetes client instead of subprocess. This requires a service & other resources.
+# TODO(chrisbuckleycode): Ship as a full app i.e. with a Dockerfile and required Kubernetes resources.
+#
 
 from flask import Flask, render_template, jsonify
 import subprocess
