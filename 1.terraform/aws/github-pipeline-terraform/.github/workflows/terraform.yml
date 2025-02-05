@@ -1,0 +1,70 @@
+name: "Terraform Plan and Apply"
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+    
+env:
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+  TF_BUCKET: ${{ secrets.TF_BUCKET }}
+
+jobs:
+  terraform-plan:
+    if: github.event_name == 'pull_request' && (github.event.action == 'opened' || github.event.action == 'synchronize')
+    name: "Terraform Plan"
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+      
+      - name: Install Terraform
+        run: |
+          wget https://releases.hashicorp.com/terraform/1.10.4/terraform_1.10.4_linux_amd64.zip
+          unzip terraform_1.10.4_linux_amd64.zip
+          sudo mv terraform /usr/local/bin/
+
+      - name: Terraform fmt
+        run: terraform fmt -check
+        continue-on-error: true
+
+      - name: Terraform Init
+        run: terraform init -no-color -backend-config="bucket=${{ secrets.TF_BUCKET }}"
+
+      - name: Terraform Validate
+        run: terraform validate -no-color
+
+      - name: Terraform Plan
+        run: terraform plan -no-color -out=plan.tfplan
+        continue-on-error: true
+
+      - name: Upload Terraform Plan to S3
+        run: aws s3 cp plan.tfplan s3://${{ secrets.TF_BUCKET }}/plan.tfplan
+
+  terraform-apply:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    name: "Terraform Apply"
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install Terraform
+        run: |
+          wget https://releases.hashicorp.com/terraform/1.10.4/terraform_1.10.4_linux_amd64.zip
+          unzip terraform_1.10.4_linux_amd64.zip
+          sudo mv terraform /usr/local/bin/
+
+      - name: Terraform Init
+        run: terraform init -no-color -backend-config="bucket=${{ secrets.TF_BUCKET }}"
+
+      - name: Download Terraform Plan from S3
+        run: aws s3 cp s3://${{ secrets.TF_BUCKET }}/plan.tfplan ./plan.tfplan
+
+      - name: Terraform Apply
+        run: terraform apply -no-color -auto-approve plan.tfplan
